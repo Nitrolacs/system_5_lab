@@ -5,7 +5,9 @@
 #include "interface.h"
 
 // Функция для обработки коэффициентов уравнения из командной строки
-int ProcessCoefficients(int argc, char *argv[], double *a, double *b, double *c, double *d) {
+int ProcessCoefficients(int argc, char *argv[], double *a, double *b,
+                        double *c, double *d)
+{
     // Объявляем переменную для хранения кода возврата функции getopt
     int opt;
 
