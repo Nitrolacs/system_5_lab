@@ -1,7 +1,6 @@
-// Серверная часть
+/*! Функция сервера */
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <string.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -15,7 +14,8 @@
 #define MAXBUF 1024
 
 // Главная функция сервера
-int main() {
+int main()
+{
     int numbytes; // количество байтов, полученных или отправленных
     int sockfd; // дескриптор сокета
     struct sockaddr_in servaddr, cliaddr; // структуры адресов сервера и клиента
@@ -23,7 +23,8 @@ int main() {
     socklen_t len; // длина адреса клиента
 
     // Создаем сокет с протоколом UDP
-    if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
+    if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) == -1)
+    {
         perror("socket");
         exit(1);
     }
@@ -37,23 +38,27 @@ int main() {
            sizeof servaddr.sin_zero); // обнуляем оставшуюся часть структуры
 
     // связываем сокет с адресом сервера
-    if (bind(sockfd, (struct sockaddr *) &servaddr, sizeof servaddr) == -1) {
+    if (bind(sockfd, (struct sockaddr *) &servaddr,
+            sizeof servaddr) == -1)
+    {
         perror("bind");
         exit(1);
     }
 
-    printf("Server listening on %s:%d\n", inet_ntoa(servaddr.sin_addr),
+    printf("Сервер слушает на %s:%d\n", inet_ntoa(servaddr.sin_addr),
            ntohs(servaddr.sin_port));
 
     // бесконечный цикл обработки запросов клиентов
-    while (1) {
+    while (1)
+    {
         // Принимаем данные от клиента
         len = sizeof(cliaddr); // длина адреса клиента
 
         // получаем сообщение от клиента в буфер buffer и запоминаем его адрес в cliaddr
         if ((numbytes = recvfrom(sockfd, buffer, MAXBUF, 0,
                                  (struct sockaddr *) &cliaddr,
-                                 &len)) == -1) {
+                                 &len)) == -1)
+        {
             perror("recvfrom");
             exit(1);
         }
@@ -73,13 +78,20 @@ int main() {
         n = sscanf(buffer, "%lf %lf %lf %lf", &a, &b, &c,
                    &d); // читаем коэффициенты из сообщения
 
-        if (n == 3) { // квадратное уравнение
+        if (n == 3)
+        {
+            // квадратное уравнение
             SolveQuadratic(a, b,
                             c); // решаем квадратное уравнение и выводим разложение на множители
-        } else if (n == 4) { // кубическое уравнение
+        }
+        else if (n == 4)
+        {
+            // кубическое уравнение
             SolveCubic(a, b, c,
                         d); // решаем кубическое уравнение и выводим разложение на множители
-        } else {
+        }
+        else
+        {
             printf("Неверный формат запроса.\n"); // некорректное количество коэффициентов
         }
     }

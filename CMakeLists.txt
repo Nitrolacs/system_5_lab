@@ -3,4 +3,4 @@ project(5_lab C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(5_lab main.c server.c server.h client.c client.h interface.c interface.h logic.c logic.h)
+add_executable(5_lab server.c server.h client.c client.h interface.c interface.h logic.c logic.h)
