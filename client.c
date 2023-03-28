@@ -1,3 +1,5 @@
+/*! Функция клиента */
+
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,12 +14,11 @@
 #define PORT 5555
 #define MAXDATASIZE 1024
 
-// Главная функция клиента
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[])
+{
     int sockfd; // дескриптор сокета
     char buffer[MAXDATASIZE]; // буфер для приема и отправки данных
     struct sockaddr_in servAddr; // структура адреса сервера
-    socklen_t addr_len;
 
     // Объявляем переменные для коэффициентов уравнения
     double a = 0;
@@ -29,7 +30,8 @@ int main(int argc, char *argv[]) {
     int result = ProcessCoefficients(argc, argv, &a, &b, &c, &d);
 
     // Проверяем результат функции
-    if (result != 0) {
+    if (result != 0)
+    {
         fprintf(stderr, "Ошибка при обработке коэффициентов.\n");
         exit(1);
     }
