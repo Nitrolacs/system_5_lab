@@ -1,15 +1,9 @@
-//
-// Created by stud on 28.03.23.
-//
-
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <netdb.h>
 #include <arpa/inet.h>
 
 #include "client.h"
@@ -56,12 +50,8 @@ int main(int argc, char *argv[]) {
     }
 
     // Отправляем данные серверу с помощью функции sendto
-    if (sendto(sockfd, buffer, strlen(buffer), 0,
-               (struct sockaddr *) &servAddr, sizeof(servAddr)) ==
-        -1) {
-        perror("sendto");
-        exit(1);
-    }
+    sendto(sockfd, buffer, strlen(buffer), 0,
+           (struct sockaddr *) &servAddr, sizeof(servAddr));
 
     printf("Отправлен запрос: %s\n",
            buffer); // выводим отправленные данные
